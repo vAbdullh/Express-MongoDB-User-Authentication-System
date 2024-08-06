@@ -17,4 +17,3 @@ For the backend, I used Express to handle server-side logic and routing. I used 
 ## What I Learned
 - Create a backend__ using Express, Mongoose, and MongoDB to build a **API**.
 - How to manage sensitive information with **.env** files, boosting my confidence in handling API keys securely. **This was a big learning experience. I was initially worried about uploading projects with sensitive information so  i was delete projects with sensitive information,** but now I feel confident managing it securely.
-- 
