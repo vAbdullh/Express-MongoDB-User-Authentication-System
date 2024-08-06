@@ -10,6 +10,7 @@ export default function Home() {
 
     return (
         <div className=' w-80 grid gap-5 content-center mx-auto overflow-hidden min-h-screen'>
+
             <div className='bg-slate-600 w-80 rounded-xl flex flex-col gap-10 justify-center items-center p-4'>
 
                 {formType === 'login' ? <Login /> : <Signup />}
@@ -21,14 +22,9 @@ export default function Home() {
             </div>
 
             <div className="text-stone-400">
-                <h2 className='font-black'>Next Goals:</h2>
-                <ul className='list-inside list-disc text-sm'>
-                    <li>Implement user role management</li>
-                    <li>Create pages and use JWT to show profile</li>
-                    <li>Create admin page to see, delete, modify, and ban users</li>
-                    <li>Add forget password process</li>
-                    <li>Enhance security measures (e.g., rate limiting, account lockout)</li>
-                </ul>
+                <h1 className='text-stone-400 text-center text-sm'>
+                    This form is built with Express, MongoDB, and React. <a href="" className='font-bold underline'>more info</a>
+                </h1>
             </div>
 
         </div>

@@ -1,9 +1,9 @@
 import axios from 'axios';
-
 export const login = async (username, password, setAlert, setaAlertMsg) => {
-
+    const apiUrl = process.env.REACT_APP_API;
+    console.log(apiUrl);
     try {
-        const response = await axios.post('http://192.168.100.11:3333/login', {
+        const response = await axios.post(`${process.env.REACT_APP_API}/login`, {
             username,
             password
         });
@@ -27,11 +27,11 @@ export const login = async (username, password, setAlert, setaAlertMsg) => {
 export const createAccount = async (name, username, password, setAlert, setAlertMsg) => {
 
     try {
-        const response = await axios.post('http://192.168.100.11:3333/create', {
+        const response = await axios.post(`${process.env.REACT_APP_API}/create`, {
             name,
             username,
             password,
-            // role: role ? role : null
+            // role: role ? role : null 
         });
 
         if (response.data && response.data.status) {

@@ -79,8 +79,9 @@ export default function Signup() {
                     />
                 </div>
                 <button
-                    className={`outline-none  bg-blue-500 rounded-md p-2 md:hover:bg-blue-900 active:bg-blue-900 ${loading && 'animate-pulse cursor-wait'}`}
-                    type="submit">Sign Up</button>
+                    type="submit"
+                    disabled={loading}
+                    className={`outline-none  bg-blue-500 rounded-md p-2 md:hover:bg-blue-900 active:bg-blue-900 ${loading && 'animate-pulse cursor-wait active:bg-blue-500'}`}>Sign Up</button>
             </form>
 
         </>
