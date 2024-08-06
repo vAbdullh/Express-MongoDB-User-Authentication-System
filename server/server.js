@@ -1,19 +1,23 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose')
+const dotenv = require('dotenv');
 const { hashPassword, compareHashedPassword, checkName, checkUsername } = require('./functions')
+
+require('dotenv').config();
+
 const app = express();
 const port = process.env.PORT;
-
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+console.log('here => ', process.env.COLLECTION_NAME);
 
 // Enable CORS
 app.use(cors());
 
 // MongoDB connection setup
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
@@ -21,7 +25,6 @@ mongoose.connect(process.env.MONGO_URI, {
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-// Define the schema and model for the admin collection
 const User = new mongoose.Schema({
     name: {
         type: String,
@@ -36,19 +39,19 @@ const User = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: 'user' // Default role is 'user'
+        default: 'user' // role is 'user' by default
     },
     createdAt: {
         type: Date,
-        default: Date.now // Automatically set to the current date and time
+        default: Date.now
     },
     shouldExpire: {
         type: Boolean,
-        default: true // Set to null by default; can be updated as needed
+        default: true // null by default
     }
 });
 
-const users = mongoose.model('users', User);
+const users = mongoose.model(process.env.COLLECTION_NAME, User);
 
 app.get('/', async (req, res) => {
     return res.send(await users.find({}))
@@ -104,7 +107,7 @@ app.post('/create', async (req, res) => {
             message: "Hmm, something\'s off with the username. Try using only letters, numbers, and underscores."
 
         })
-        if (!checkName(name)) return res.send({
+        if (!checkName(name) || !name) return res.send({
             status: false,
             message: "Whoops! Make sure the name has at least three letters and only alphabet characters—no special symbols!"
         })
