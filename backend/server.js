@@ -1,29 +1,27 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose')
-const dotenv = require('dotenv');
 const { hashPassword, compareHashedPassword, checkName, checkUsername } = require('./functions')
 
-require('dotenv').config();
-
 const app = express();
-const port = process.env.PORT;
-// Middleware to parse JSON bodies
+const port = process.env.PORT || 3000;
+const url = process.env.MONGO_URL || "mongodb://localhost:27017/authSystem";
 app.use(express.json());
-
-console.log('here => ', process.env.COLLECTION_NAME);
 
 // Enable CORS
 app.use(cors());
 
+console.log('PORT:', process.env.PORT);
+console.log('MONGO_URL:', process.env.MONGO_URL);
+
 // MongoDB connection setup
-mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}
-)
+mongoose.connect(url, {
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true
+})
     .then(() => console.log('MongoDB connected'))
-    .catch(err => console.error('MongoDB connection error:', err));
+    .catch(err => console.error('MongoDB connection error:'));
 
 const User = new mongoose.Schema({
     name: {
@@ -47,14 +45,20 @@ const User = new mongoose.Schema({
     },
     shouldExpire: {
         type: Boolean,
-        default: true // null by default
+        default: true // null by default        
     }
 });
 
-const users = mongoose.model(process.env.COLLECTION_NAME, User);
+const users = mongoose.model('authSystem', User);
+
+app.use((req, res) => {
+    return res.status(404).json({
+        message: 'bad request'
+    });
+});
 
 app.get('/', async (req, res) => {
-    return res.send(await users.find({}))
+    return Boolean(res.send(await users.find({})))
 })
 
 app.post('/login', async (req, res) => {
@@ -63,7 +67,7 @@ app.post('/login', async (req, res) => {
 
     try {
 
-        const user = await users.findOne({ username: username.toLowerCase() });
+        const user = await users.findOne({ username: username });
 
         if (!user) {
             return res.json({
