@@ -10,10 +10,10 @@ visit the Page: [click here](link)
 - Enhance security measures (e.g., rate limiting, account lockout, spam)
 
 ### Frontend
-For the frontend, I used React to create the layout and Axios to fetch data from the backend.
+For the frontend, I used React and Tailwindcss to create the layout and Axios to fetch data from the backend.
 ### Backend
 For the backend, I used Express to handle server-side logic and routing. I used Mongoose to interact with the MongoDB database. For hashing passwords, I used bcrypt to ensure security.
 
 ## What I Learned
-- Create a backend__ using Express, Mongoose, and MongoDB to build a **API**.
+- __Create a backend__ using Express, Mongoose, and MongoDB to build a **API**.
 - How to manage sensitive information with **.env** files, boosting my confidence in handling API keys securely. **This was a big learning experience. I was initially worried about uploading projects with sensitive information so  i was delete projects with sensitive information,** but now I feel confident managing it securely.

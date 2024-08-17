@@ -12,9 +12,6 @@ app.use(express.json());
 // Enable CORS
 app.use(cors());
 
-console.log('PORT:', process.env.PORT);
-console.log('MONGO_URL:', process.env.MONGO_URL);
-
 // MongoDB connection setup
 mongoose.connect(url, {
     // useNewUrlParser: true,
@@ -50,12 +47,6 @@ const User = new mongoose.Schema({
 });
 
 const users = mongoose.model('authSystem', User);
-
-app.use((req, res) => {
-    return res.status(404).json({
-        message: 'bad request'
-    });
-});
 
 app.get('/', async (req, res) => {
     return Boolean(res.send(await users.find({})))
@@ -134,12 +125,18 @@ app.post('/create', async (req, res) => {
         await newUser.save();
         return res.json({
             status: true,
-            message: "Account created! It will automatically expire after one hour."
+            message: "Account created! It will automatically expire after one hour. Try to log in with your new user."
         })
     } catch (error) {
         console.log(error);
     }
 
+});
+app.use((req, res) => {
+    return res.status(404).json({
+        status: false,
+        message: 'bad request'
+    });
 });
 
 app.listen(port, () => {
