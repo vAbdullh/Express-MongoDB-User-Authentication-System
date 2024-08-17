@@ -1,3 +1,0 @@
-PORT=3333
-MONGO_URL=mongodb://apiuser:api12312@138.68.188.226:27017/authSystem?authSource=admin    
-COLLECTION_NAME=users

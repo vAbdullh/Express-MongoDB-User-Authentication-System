@@ -23,7 +23,7 @@ export default function Home() {
 
             <div className="text-stone-400">
                 <h1 className='text-stone-400 text-center text-sm'>
-                    This form is built with Express, MongoDB, and React. <a href="" className='font-bold underline'>more info</a>
+                    This form is built with Express, MongoDB, and React. <a href="https://github.com/vAbdullh/Express-MongoDB-User-Authentication-System" className='font-bold underline'>more info</a>
                 </h1>
             </div>
 
