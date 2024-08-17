@@ -1,6 +1,6 @@
 # Express-MongoDB User Authentication System
 This is my first backend project where I use MongoDB and Express to implement a user authentication system. It includes password hashing using bcrypt for enhanced security.
-visit the Page and try it online: [click here](http://auth2.abdullh.tech/) its connect to active backend.git 
+visit the Page and try it online: [click here](http://auth2.abdullh.tech/) its connect to active backend.
 
 ## Incoming Goals
 - Implement user role management
